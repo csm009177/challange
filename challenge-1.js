@@ -1,18 +1,13 @@
-function callengeTwo(arr) {
-  let n = arr.length;
-
-  for(let i=0; i<n-1; i++){
-    for(let j=0; j<n-i-1; j++){
-      if(arr[j] > arr[j+1]) {
-        let temp = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j+1] = temp;
-      }
-    }
+function lifeIsLoop(callback, interval) {
+  function repeat() {
+    callback();
+    // 위에서 만들어진 callback 함수는 repeat 함수 내부에서 실행된다
+    setTimeout(repeat, interval);
+    //정해진 시간이 지나면 repeat 함수를 다시 실행한다
+    // '내가 나를' 호출하는 형태이다
+    setTimeout(repeat, interval);
   }
-  return arr;
 }
-const unsortedArray = [64, 34, 25, 12, 22, 11, 90];
-console.log(callengeTwo(unsortedArray));
-// 출력 : [11, 12, 22, 25, 34, 64, 90]
-
+lifeIsLoop(function() {
+  console.log("돌고");
+}, 2000);
